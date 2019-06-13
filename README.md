@@ -1,5 +1,7 @@
 # diffmove
 
+**THIS IS A VERY EARLY TEST SCRIPT. PLAY WITH IT CAREFULLY.  `RCLONE MOVE` IS A POWERFUL COMMAND**
+
 **Usage:** `./diffmove source: destination:`
 
 Using rclone, generate a list of files that are on a source and not on a destination.
