@@ -4,4 +4,5 @@
 # Generally dedupe is not required. But if you get a 'parent' or other error, try running dedupe on source and destination
 rclone check $1 $2 --size-only --one-way --no-traverse > check.log 2>&1
 awk 'BEGIN { FS = ": " } /ERROR/ {print $2}' check.log > difflist.txt
-#grep -w ERROR check.log | cut -d':' -f4 > difflist.txt
+# grep -w ERROR check.log | cut -d':' -f4 > difflist.txt
+# Both the awk and the grep commands should work equally well.
