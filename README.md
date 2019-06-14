@@ -20,7 +20,9 @@ file2
 file3         file3
 file4         file4
               file5
+```
 
+```
 After diffmove
 Source:       Destination:
               file1
