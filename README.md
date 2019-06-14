@@ -11,7 +11,7 @@ destination remote.
 Files present on both source and destination remain on source.    
 Files present only on destination are not touched.
 
-Example: ./diffmove source: destination:`
+Example: `./diffmove source: destination:`
 
 ```Before diffmove
 Source:       Destination:
@@ -27,7 +27,8 @@ Source:       Destination:
               file2
 file3         file3
 file4         file4
-              file5```
+              file5
+```
               
 **If you wish to create the list of files missing from the destination but not execute the move, 
 run `./difflist source: destination:` rather than diffmove.**
