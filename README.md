@@ -11,7 +11,7 @@ Files present only on destination are not touched.
 
 Example: ./diffmove source: destination:`
 
-Before diffmove
+```Before diffmove
 Source:       Destination:
 file1
 file2
@@ -25,7 +25,7 @@ Source:       Destination:
               file2
 file3         file3
 file4         file4
-              file5
+              file5```
               
 If you wish to only create the list but not execute the move, run `./difflist source: destination:` rather than diffmove.
 
