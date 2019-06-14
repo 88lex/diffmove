@@ -1,6 +1,6 @@
 # diffmove
 
-**THIS IS A VERY EARLY TEST SCRIPT. PLAY WITH IT CAREFULLY.  `RCLONE MOVE` IS A POWERFUL COMMAND**
+**THIS IS A VERY EARLY TEST SCRIPT. PLAY WITH IT CAREFULLY.  `RCLONE MOVE` IS A POWERFUL COMMAND**  
 **Further information and tools can be found  at https://github.com/88lex/sa-guide**
 
 
