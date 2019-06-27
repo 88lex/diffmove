@@ -2,7 +2,11 @@
 # rclone dedupe skip $1 -vP
 # rclone dedupe skip $2 -vP
 # Generally dedupe is not required. But if you get a 'parent' or other error, try running dedupe on source and destination
+echo == STARTING DIFFMOVE ==;echo
 rclone check $1 $2 --size-only --one-way --no-traverse > check.log 2>&1
+echo == CREATING DIFFLIST ==;echo
 awk 'BEGIN { FS = ": " } /ERROR/ {print $2}' check.log > difflist.txt
 #grep -w ERROR check.log | cut -d':' -f4 > difflist.txt
-rclone move --files-from difflist.txt $1 $2 -vP --drive-server-side-across-configs
+echo == STARTING RCLONE MOVE ==;echo
+rclone move --files-from difflist.txt $1 $2 -vP --drive-server-side-across-configs=true --transfers 20
+echo == DIFFMOVE FINISHED ==;echo
