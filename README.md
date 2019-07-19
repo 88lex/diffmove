@@ -1,14 +1,13 @@
 # diffmove
+**THIS IS A TEST SCRIPT. PLAY WITH IT CAREFULLY.**  
 
-**THIS IS A VERY EARLY TEST SCRIPT. PLAY WITH IT CAREFULLY.  `RCLONE MOVE` IS A POWERFUL COMMAND**  
-**Further information and tools can be found  at https://github.com/88lex/sa-guide**
+**Usage diffmove:** ```./diffmove source: destination:```    
+**Usage diffsets:** ```./diffsets dset.video```        
+**Usage difflist:** ```./difflist source: destination:```    
 
-
-**Usage:** `./diffmove source: destination:`
-
-Using rclone, generate a list of files that are on a source and not on a destination.
-Diffmove then **moves** the files that are missing in the destination from the source remote to the 
-destination remote. 
+**DIFFMOVE**    
+diffmove uses rclone to generate a list of files that are on source but not on the destination remote, and
+then **moves** those files from source to the destination remote. 
 
 Files present on both source and destination remain on source.    
 Files present only on destination are not touched.
@@ -33,7 +32,18 @@ file3         file3
 file4         file4
               file5
 ```
-              
-**If you wish to create the list of files missing from the destination but not execute the move, 
-run `./difflist source: destination:` rather than diffmove.**
+
+**DIFFSETS**    
+diffsets uses a set file containing any number of source-destination pairs along with diffmove to move files as described above for each pair.
+
+```
+#source                     destination
+bak:home_movies             gdrive:Media/home_movies
+bak:travel_video            gdrive:Media/travel_video
+```
+
+**DIFFLIST**    
+difflist is a standalone script using `rclone check` to find differences between source and destination rclone remotes.    
+difflist generates a flat text file called difflist.txt which contains files that exist on source but not on destination (a one way compare).
+
 
