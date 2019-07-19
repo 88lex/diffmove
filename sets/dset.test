@@ -1,0 +1,3 @@
+#source                     destination
+bak:home_movies             gdrive:Media/home_movies
+bak:travel_video            gdrive:Media/travel_video
