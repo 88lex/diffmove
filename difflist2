@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# Requires installation of moreutils to run combine.
+# sudo apt install moreutils
+
 
 rclone tree -di --level 2 $1>tmp1
 rclone tree -di --level 2 $2>tmp2
