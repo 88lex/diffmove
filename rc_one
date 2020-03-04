@@ -6,6 +6,5 @@ src=$2
 dest=$3
 
 while read -r name; do
-    echo rclone $action "$src$name" "$dest$name" -vP
-    COUNT=$(( $COUNT%$MAXSA+1 ))
+    rclone $action "$src$name" "$dest$name" -vP
 done < <(rclone tree -d -i --level 1 --full-path --noreport $src | sort -r)
