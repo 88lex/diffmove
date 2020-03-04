@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
+# Requires installation of moreutils to run combine.
+# sudo apt install moreutils
 
-rclone tree -d -i --level 4 $1>tmp1
-rclone tree -d -i --level 4 $2>tmp2
+
+rclone tree -di --level 2 $1>tmp1
+rclone tree -di --level 2 $2>tmp2
 
 sort -o tmp1 tmp1
 sort -o tmp2 tmp2
@@ -11,6 +14,3 @@ combine tmp2 not tmp1>not_in_1
 
 rm tmp1
 rm tmp2
-
-
-
