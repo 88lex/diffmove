@@ -15,4 +15,4 @@ while read -r name; do
     echo rclone $action "$src$name" "$dest$name" --drive-service-account-file=$COUNT.json \
     --drive-stop-on-upload-limit -vP
     COUNT=$(( $COUNT%$MAXSA+1 ))
-done < <(rclone tree -d -i --level $lev --full-path --noreport $src | tail -n +2)
+done < <(rclone tree -d -i --level $lev --full-path --noreport $src | sort -r)

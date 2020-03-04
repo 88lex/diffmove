@@ -8,4 +8,4 @@ dest=$3
 while read -r name; do
     echo rclone $action "$src$name" "$dest$name" -vP
     COUNT=$(( $COUNT%$MAXSA+1 ))
-done < <(rclone tree -d -i --level 1 --full-path --noreport $src | tail -n +2)
+done < <(rclone tree -d -i --level 1 --full-path --noreport $src | sort -r)
