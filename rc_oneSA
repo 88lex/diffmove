@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
+# USAGE ./rc_oneSA sync src: dest:  <= change sync to copy/move as needed
 
 SADIR=/opt/sa/
 MINSA=1
 MAXSA=1000
 COUNT=$MINSA
 
+lev=1
 action=$1
 src=$2
 dest=$3
@@ -13,4 +15,4 @@ while read -r name; do
     echo rclone $action "$src$name" "$dest$name" --drive-service-account-file=$COUNT.json \
     --drive-stop-on-upload-limit -vP
     COUNT=$(( $COUNT%$MAXSA+1 ))
-done < <(rclone tree -d -i --level 1 --full-path --noreport $src | tail -n +2)
+done < <(rclone tree -d -i --level $lev --full-path --noreport $src | tail -n +2)
