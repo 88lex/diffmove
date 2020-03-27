@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 # Requires installation of moreutils to run combine.
 # sudo apt install moreutils
+# The default command  below compares directories, not files
+# Adjust --level to control how deeply you recurse into the tree
 
+rclone tree -di --level 2 $1 | sort >tmp1
+rclone tree -di --level 2 $2 | sort >tmp2
 
-rclone tree -di --level 2 $1>tmp1
-rclone tree -di --level 2 $2>tmp2
-
-sort -o tmp1 tmp1
-sort -o tmp2 tmp2
+# use these commands below if you want to compare files, not dirs
+#rclone tree -i --full-path $1 | sort >tmp1
+#rclone tree -i --full-path $2 | sort >tmp2
 
 combine tmp1 not tmp2>not_in_2
 combine tmp2 not tmp1>not_in_1
