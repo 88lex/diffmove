@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# rclone dedupe skip $1 -vP
+# rclone dedupe skip $2 -vP
+# Generally dedupe is not required. But if you get a 'parent' or other error, try running dedupe on source and destination
+
+echo STARTING DIFFSPLIT;echo
+rclone check $2 $1 --size-only --one-way --fast-list > check.log 2>&1
+awk 'BEGIN { FS = ": " } /ERROR/ {print $2}' check.log > diffsplit.txt
+echo Number of files to be moved
+num_files=`cat diffsplit.txt | wc -l`
+echo $num_files
+[ $num_files -gt 0 ] && {
+dest="${2%%:*}:backup/${2#*:}"
+rclone mkdir $dest
+echo -e "Moving files which are in $2 but not in $1 to $dest"
+rclone move --files-from diffsplit.txt $2 $dest -vP --stats=10s --drive-use-trash=false --drive-server-side-across-configs=true --transfers 32 --checkers=32 --use-mmap  --max-backlog=2000000 --fast-list
+rm check.log diffsplit.txt; }
+echo DIFFMOVE FINISHED moving differential files from $2 to $dest ;echo
+
+# /opt/sasync/utils/sizeup $2

@@ -11,6 +11,7 @@ num_files=`cat difflist.txt | wc -l`
 echo $num_files
 [ $num_files -gt 0 ] && {
 echo STARTING RCLONE MOVE from $1 to $2;echo
-rclone move --files-from difflist.txt $1 $2 -vP --stats=10s --drive-use-trash=false --drive-server-side-across-configs=true --transfers 32 --checkers=64 --use-mmap  --max-backlog=2000000
+rclone move --files-from difflist.txt $1 $2 -vP --stats=10s --drive-use-trash=false --drive-server-side-across-configs=true \
+  --transfers 16 --checkers=16 --use-mmap  --max-backlog=2000000 --fast-list --tpslimit 4 --tpslimit-burst 20
 rm check.log difflist.txt; }
 echo DIFFMOVE FINISHED moving differential files from $1 to $2;echo

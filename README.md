@@ -1,5 +1,6 @@
 # diffmove
-**THIS IS A TEST SCRIPT. PLAY WITH IT CAREFULLY.**
+
+### ADDED diffsplit as a standalone and as an option within diffsets (see below)
 
 **Usage diffmove:** ```./diffmove source: destination:```\
 **Usage diffsets:** ```./diffsets dset.video```\
@@ -33,6 +34,11 @@ file4         file4
               file5
 ```
 
+**DIFFSPLIT**\
+`./diffsplit source: destination:`
+
+diffsplit moves files and folders that are in the `destination:` remote but not in the `source:` remote into a backup folder `destination:backup`
+
 **DIFFSETS**\
 diffsets uses a set file containing any number of source-destination pairs along with diffmove to move files as described above for each pair.
 
@@ -41,6 +47,16 @@ diffsets uses a set file containing any number of source-destination pairs along
 bak:home_movies             gdrive:Media/home_movies
 bak:travel_video            gdrive:Media/travel_video
 ```
+
+**NOTE:** diffsets will now move files to `destination:backup` IF you include a third column with a master remote. *Be careful* Remember that you have moved files out of the source, so you cannot use source as master. Using diffsplit within diffsets requires you to have a third remote (a 'master' that copies to source, which is then moved to destination).
+
+```
+#source                     destination                  master
+bak:home_movies             gdrive:Media/home_movies     master:Media/home_movies
+bak:travel_video            gdrive:Media/travel_video
+```
+In the above example diffsplit will run for home_movies but not for travel_video. After running, home_movies will be identical in master and destination.
+
 
 **DIFFLIST**\
 difflist is a standalone script using `rclone check` to find differences between source and destination rclone remotes.

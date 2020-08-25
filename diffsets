@@ -1,15 +1,20 @@
 #!/usr/bin/env bash
-echo STARTING DIFFSETS ; echo
+echo -e "STARTING DIFFSETS\n"
 SET_DIR=/opt/diffmove/sets
 
 process_sets () {
   for set_file in $@; do
     echo set file = $set_file ; sleep 3s
     column -t $SET_DIR/$set_file|tee /dev/tty|sed '/^\s*#.*$/d'|\
-    while IFS=$' \t\n' read -r src dest; do
-      echo -e "Running /opt/diffmove/diffmove $src $dest\n"
+    while IFS=$' \t\n' read -r src dest master; do
+      echo -e "Running diffmove: Move files from $src that are not in $dest\n"
       /opt/diffmove/diffmove $src $dest
       echo -e "Completed diffmove $src $dest\n"
+      if [ ! -z "$master" ]; then
+        echo -e "Running diffsplit: Check $dest against master copy in $master\n"
+        /opt/diffmove/diffsplit $master $dest
+        echo -e "Completed diffsplit $master $dest\n"
+      fi
     done
   done
 }
@@ -17,3 +22,4 @@ process_sets () {
 process_sets $@
 
 echo ; echo DIFFSETS COMPLETED ; echo
+/opt/cleanremotes/cleanremote $2
