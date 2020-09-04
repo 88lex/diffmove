@@ -13,7 +13,7 @@ echo $num_files
 dest="${2%%:*}:backup/${2#*:}"
 rclone mkdir $dest
 echo -e "Moving files which are in $2 but not in $1 to $dest"
-rclone move --files-from diffsplit.txt $2 $dest -vP --stats=10s --drive-use-trash=false --drive-server-side-across-configs=true\
+rclone move --files-from diffsplit.txt $2 $dest -vP --stats=10s --drive-use-trash=false --drive-server-side-across-configs=true \
 --tpslimit=4 --tpslimit-burst=32 --transfers 32 --checkers=32 --use-mmap  --max-backlog=2000000
 rm check.log diffsplit.txt; }
 echo DIFFMOVE FINISHED moving differential files from $2 to $dest ;echo
